@@ -1,0 +1,5 @@
+- Allow specifying a set of repos/branches to track, e.g. branch nixos-20.03 from github.com/NixOS/nixpkgs
+- Periodically check (or manually on demand) whether the branch has been updated (fetch existing docker tags to figure this out, no state!)
+  - First do a niv update and commit the result if something changed
+	- Then do a check for the docker hub tag and build/update/push it if necessary
+- If it has been updated, build a new Docker image with the commit of the branch as the tag and publish it
