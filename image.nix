@@ -39,6 +39,7 @@ dockerTools.buildImageWithNixDb {
     #  inherit (nixpkgs) url sha256;
     #})
     # For niv fetches
+    # TODO: This also puts all of nixpkgs' files in / .. :/
     nixpkgs
 
     #(runCommandNoCC "stuff" {} ''
@@ -56,12 +57,6 @@ dockerTools.buildImageWithNixDb {
 
     # need a HOME
     #mkdir -vp root
-  '';
-
-  runAsRoot = ''
-    #!${stdenv.shell}
-    ${dockerTools.shadowSetup}
-    useradd builder
   '';
 
   config = {
