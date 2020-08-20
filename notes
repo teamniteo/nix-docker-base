@@ -6,9 +6,3 @@
   - First do a niv update and commit the result if something changed
 	- Then do a check for the docker hub tag and build/update/push it if necessary
 - If it has been updated, build a new Docker image with the commit of the branch as the tag and publish it
-
-# Todos for the image flow:
-
-- Currently tests/Dockerfile shows how to get a minimal image. Make this more ergonomic by providing a command like `nix-provide [PATH..]` for the first layer, which makes all those paths be propagated to the second layer (if the COPY is used).
-- Maybe use nix-env to combine multiple PATHs (in the first layer) -> can "install" only a single store path to get everything
-- How to avoid nixpkgs files ending up in /?
