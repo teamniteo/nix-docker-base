@@ -26,6 +26,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git commit -m "Automatic niv update" -a
         fi
+        exit 0
     - name: Push changes
       uses: ad-m/github-push-action@v0.6.0
       with:
