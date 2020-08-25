@@ -1,7 +1,7 @@
 name: Niv update
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '* * * * *'
 
 jobs:
   niv-update:
