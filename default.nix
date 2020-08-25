@@ -27,7 +27,7 @@ let
             echo "Image built successfully" >&2
             src=docker-archive://$PWD/result
             echo "Pushing the image.." >&2
-            if ! ${pkgs.skopeo}/bin/skopeo copy --additional-tag test --dest-creds "$REGISTRY_USER:$REGISTRY_PASSWORD" "$src" "${dest}"; then
+            if ! ${pkgs.skopeo}/bin/skopeo copy --dest-creds "$REGISTRY_USER:$REGISTRY_PASSWORD" "$src" "${dest}"; then
               echo "Error pushing the image" >&2
             else
               echo "Successfully pushed the image" >&2
