@@ -17,16 +17,22 @@ let
         if ${pkgs.skopeo}/bin/skopeo inspect --creds "$REGISTRY_USER:$REGISTRY_PASSWORD" "${dest}"; then
           # TODO: Compare hashes, so updates that don't change the channel can be pushed
           echo "Image does exist, no update necessary" >&2
+
         else
           # TODO: Check whether it doesn't exist or if it's another error
           echo "Error inspecting the image, assuming it doesn't exist" >&2
+
+          # TODO: This here makes it depend on the nixpkgs source
+          # Refactor to only need that if we actually need to push an update
           echo "Building the image.." >&2
           if ! nix-build ${builtins.unsafeDiscardStringContext image.drvPath}; then
             echo "Error building the image" >&2
+
           else
             echo "Image built successfully" >&2
-            src=docker-archive://$PWD/result
+
             echo "Pushing the image.." >&2
+            src=docker-archive://$PWD/result
             if ! ${pkgs.skopeo}/bin/skopeo copy --dest-creds "$REGISTRY_USER:$REGISTRY_PASSWORD" "$src" "${dest}"; then
               echo "Error pushing the image" >&2
             else
