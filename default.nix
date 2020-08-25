@@ -14,7 +14,7 @@ let
       in ''
         echo "=== Image ${dest} ==="
         echo "Inspecting whether the image already exists.." >&2
-        if ! ${pkgs.skopeo}/bin/skopeo inspect "${dest}"; then
+        if ${pkgs.skopeo}/bin/skopeo inspect --creds "$REGISTRY_USER:$REGISTRY_PASSWORD" "${dest}"; then
           # TODO: Compare hashes, so updates that don't change the channel can be pushed
           echo "Image does exist, no update necessary" >&2
         else
