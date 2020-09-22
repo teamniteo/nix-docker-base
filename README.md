@@ -66,7 +66,7 @@ niv init
 
 Finally, use the following command to check the tarballs name. It needs to end with `nixpkgs-src` for the prefetched nixpkgs to apply:
 ```
-nix-instantiate --eval -E '(import nix/sources.nix).nixpkgs.outPath
+nix-instantiate --eval -E '(import nix/sources.nix).nixpkgs.outPath'
 => "/nix/store/r07cldfsnr8kvkr1kpsc6jf6bibfc1mg-nixpkgs-src"
 ```
 
