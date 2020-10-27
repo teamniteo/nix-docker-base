@@ -153,6 +153,28 @@ rev=$(jq -r .nixpkgs.rev nix/sources.json)
 sed -i "s#FROM.*AS build#FROM niteo/nixpkgs-$channel:$rev AS build#g" Dockerfile
 ```
 
+### Debugging issues on CircleCI & GitHub Actions
+
+It makes sense to use these base images for production and also on CI services. You might be used to SSHing into a running container on the CI service if there is a strange failure, which you [cannot do with these base images](https://github.com/niteoweb/nix-docker-base/issues/9). But there is a (better) alternative: you can run the base image locally and run all the CI commands locally, making your debugging much faster. 
+
+Here is how a debug session for a failure in GitHub Actions would look like:
+
+```sh
+$ docker run -it niteo/nixpkgs-nixos-20.03:a26e92a67d884db696792d25dcc44c466a1bc8b4 bash
+
+# Download ZIP archive of repo code to ~/Downloads folder from GitHub
+
+# Open a new terminal window
+$ docker container ls
+# Find the name of the container running the base image
+$ docker cp ~/Downloads/myproject.zip <MY_CONTAINER_NAME>:/  
+
+# Now back to bash session in the first terminal window
+$ nix-shell -p unzip --run "unzip /myproject.zip" 
+$ cd myproject/
+$ nix-shell --run "whatever command failed in GitHub Actions"
+```
+
 ## Development and Contributing
 
 This section is only intended for developers/contributors of this project. Feel free to contribute by opening a PR or open issues for enquiries.
