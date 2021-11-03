@@ -163,7 +163,7 @@ processEntry() {
 }
 
 
-curl -sSf "https://channels.nix.gsc.io/$channel/history-v2" \
+curl -sSf "https://gist.githubusercontent.com/zupo/8f8968c02dc35ffe835dbd78c430423d/raw/b068189a73bf0208854176714e8b6336adfaaf96/gistfile1.txt" \
   | tail -n"$count" \
   | tac \
   | while read -r entry; do
