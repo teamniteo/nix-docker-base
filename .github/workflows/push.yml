@@ -28,6 +28,8 @@ jobs:
     - uses: cachix/install-nix-action@v14.1
       with:
         skip_adding_nixpkgs_channel: true
+        extra_nix_config: |
+          experimental-features = nix-command
     - uses: cachix/cachix-action@v10
       with:
         name: nix-docker-base
