@@ -22,12 +22,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        channel: [ "nixos-21.11"]
+        channel: [ "nixos-21.11", "nixos-21.05"]
+      fail-fast: false
     steps:
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v16
       with:
-        skip_adding_nixpkgs_channel: true
+         nix_path: nixpkgs=channel:nixos-unstable
     - uses: cachix/cachix-action@v10
       with:
         name: nix-docker-base
