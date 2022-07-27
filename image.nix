@@ -80,6 +80,12 @@ let
     nixpkgs
   ];
 
+  # fix for:
+  # `nix-instantiate: /nix/store/ikl21vjfq900ccbqg1xasp83kadw6q8y-glibc-2.32-46/lib/libc.so.6: version `GLIBC_2.33' not found (required by /nix/store/j132k1ncfn6gjfd2f5s1gz37170rch4h-gcc-11.3.0-lib/lib/libstdc++.so.6)`
+  patchGLIBC = ''
+    export LD_LIBRARY_PATH=${pkgs.stdenv.cc.cc.lib}/lib/:$LD_LIBRARY_PATH
+  '';
+
   # This section is copied from https://github.com/NixOS/nixpkgs/blob/7a100ad9543687d046cfeeb5156dfaa697e1abbd/pkgs/build-support/docker/default.nix#L39-L57
   # but adjusted to support additional contents
   extraCommands = ''
@@ -101,7 +107,7 @@ let
 
     # make sure /tmp exists
     mkdir -m 1777 tmp
-  '';
+  '' + patchGLIBC;
 in pkgs.dockerTools.buildImage {
   name = "nixpkgs";
   # Doesn't make images have a creation date of 1970
