@@ -1,3 +1,11 @@
+# DEPRECATED!
+
+This project relied on https://channels.nix.gsc.io/ to get commits to nixos channels.
+This website is no longer updated so no new Docker images are built and uploaded to Docker Hub.
+If you want to built one image manually, see https://github.com/teamniteo/nix-docker-base/pull/23.
+
+We are no longer maintaining this project. Reach out if you want to take over.
+
 # nix-docker-base: Nix Docker base images for fast and minimal builds
 
 This project automatically generates Docker images for nixpkgs channels. The images come with a prefetched nixpkgs, corresponding to the image tag, which is the nixpkgs commit hash. All basic Nix utilities are preinstalled, including [Cachix](https://cachix.org/). Also included is the `export-profile` script, allowing super minimal images via [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/).
