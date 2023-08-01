@@ -111,6 +111,7 @@ processEntry() {
   isFirst=
 
   read commit commitDate advanceDate <<< "$entry"
+  commit="c7a18f89ef1dc423f57f3de9bd5d9355550a5d15"
   echo "Processing commit $commit which $channel advanced to at $(date --date="@$advanceDate")" >&2
 
   if [[ -n "$testing" && -n "$first" ]]; then
